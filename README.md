@@ -15,6 +15,8 @@ This is a Python-based Flask project and esp32, sesboardv1, project to be used i
 6. [ESP32 sesBoard v1](https://github.com/JKUATSES/sesBoardv1) This is the microcontroller to be used for the physical voting booth
 7. [Nextion display](https://nextion.tech/) This is the Human Machine Interface for the physical voting booth.
 8. [Africastalking](https://developers.africastalking.com/) To build SMS and USSD frontend applications
+9. [Django Rest](https://www.django-rest-framework.org/) Django REST framework is a powerful and flexible toolkit for building Web APIs.
+
 
 ## Procedural Design
 The mockups for the app design can be viewed here
