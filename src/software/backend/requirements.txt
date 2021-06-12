@@ -6,6 +6,11 @@ colorama==0.4.4
 coverage==5.5
 Django==3.2.3
 djangorestframework==3.12.4
+django-filter>=2.4.0
+django-allauth>=0.44.0
+dj-rest-auth>=2.1.7
+python-dotenv>=0.17.0
+djangorestframework_simplejwt>=4.7.1
 flake8==3.9.2
 iniconfig==1.1.1
 isort==5.8.0
