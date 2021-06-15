@@ -51,6 +51,7 @@ jobs:
       run: |
         cd src/software/backend
         echo "SECRET_KEY=django-insecure-rf1mfkvesu-n0+kptvnw5ye" > .env
+        python manage.py makemigrations
         python manage.py migrate
         python manage.py test
         coverage run --source='.' manage.py test
