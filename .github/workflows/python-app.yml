@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      SECRET_KEY: ${{ secrets.CI_SECRET_KEY }}
     strategy:
       fail-fast: false
       matrix:
