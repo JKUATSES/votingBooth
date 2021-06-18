@@ -1,3 +1,3 @@
 # SRC
 
-This directory contains developement files for the votingbooth.
+This directory contains development files for the voting booth.

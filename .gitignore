@@ -156,3 +156,30 @@ dmypy.json
 *.exe
 *.out
 *.app
+
+
+
+# .GITIGNORE FILES FOR THE INTERIOR REACT PROJECT
+
+# dependencies
+.idea
+src/software/frontend/web/voting-booth-frontend/node_modules
+src/software/frontend/web/voting-booth-frontend/.pnp
+src/software/frontend/web/voting-booth-frontend.pnp.js
+
+# testing
+src/software/frontend/web/voting-booth-frontend/coverage
+
+# production
+src/software/frontend/web/voting-booth-frontend/build
+
+# misc
+src/software/frontend/web/voting-booth-frontend/.DS_Store
+src/software/frontend/web/voting-booth-frontend/.env.local
+src/software/frontend/web/voting-booth-frontend/.env.development.local
+src/software/frontend/web/voting-booth-frontend/.env.test.local
+src/software/frontend/web/voting-booth-frontend/.env.production.local
+
+src/software/frontend/web/voting-booth-frontend/npm-debug.log*
+src/software/frontend/web/voting-booth-frontend/yarn-debug.log*
+src/software/frontend/web/voting-booth-frontend/yarn-error.log*
