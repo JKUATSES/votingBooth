@@ -1,0 +1,276 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: blue #7d7d7d;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 1000px;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: blue;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 100px;
+}
+
+body {
+    background-color: #edf2f8;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 4px 10px;
+}
+
+h1 {
+    margin: 0;
+    padding: 10px 10px 10px 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #006090;
+    text-align: left;
+    background: white;
+}
+
+.Dashboard {
+    width: 95%;
+    background-color: white;
+    min-height: 65vh;
+    height: 85vh;
+    border-radius: 10px;
+    /*box-shadow: 0 0 4px 1px #0243DE77;*/
+    margin: 15px auto;
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+
+/********** SPECIFICALLY - LOGIN PAGE ************/
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+}
+
+.login-page {
+    padding: 6px;
+    /*max-height: 50%;*/
+    width: -moz-fit-content;
+    width: 700px;
+    min-height: 400px;
+    max-width: 85%;
+    margin: auto auto;
+    display: flex;
+}
+
+.password-logo-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 50%;
+    background-color: #17353F;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    border-radius: 20px 0 0 20px;
+    box-shadow: -1px 4px 8px 1px #5555;
+}
+
+.login-page img {
+    object-fit: contain;
+    width: 150px;
+    height: 150px;
+}
+
+.password-logo-container span {
+    margin: 5px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #fafafa;
+}
+
+.login-form {
+    padding: 20px 10px;
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    box-shadow: 1px 4px 8px 1px #5555;
+    border-radius: 0 20px 20px 0;
+}
+
+.login-form h2 {
+    font-weight: 600;
+    margin: 10px 0 16px 0;
+    text-align: center;
+    color: #006090;
+}
+
+.login-form .input-row {
+    display: flex;
+    border-radius: 2px;
+    align-items: stretch;
+    margin: 10px;
+    padding: 0 5px 0 5px;
+    box-shadow: 0 0 4px 1px #5555;
+    color: #101010;
+}
+
+.login-input {
+    font-size: 14px;
+    border: 2px solid transparent;
+    background: transparent;
+    padding: 10px;
+    outline: #006090;
+    border-radius: 2px;
+    margin: 0 10px 10px;
+    box-shadow: 0 0 4px 1px #5555;
+    color: #101010;
+}
+
+.login-form input:focus,
+.password-field:focus {
+    border: 2px solid #006090;
+    transition: all 0.15s;
+}
+
+.login-form .login-btn {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    color: #fff;
+    box-shadow: 0 0 4px 1px #5555;
+}
+
+.password-field {
+    display: flex;
+    margin: 0 10px 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    box-shadow: 0 0 4px 1px #5555;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #101010;
+}
+
+.phone-input.password-field{
+    flex-flow: row-reverse;
+    margin: 0 10px 10px;
+}
+
+.phone-input.password-field .login-input{
+    margin: 0;
+    box-shadow: none;
+    flex-grow: 1;
+}
+
+.phone-input.password-field span{
+    padding: 10px;
+    font-size: 14px;
+}
+.phone-input.password-field .login-input:focus{
+    border: 2px solid #006090;
+    border-left-width: 0;
+}
+
+.phone-input.password-field .login-input:focus + span {
+    border: 2px solid #006090;
+    border-right-width: 0;
+        font-size: 12.5px;
+}
+
+.password-field svg {
+    margin: 5px;
+    outline: none;
+}
+
+.password {
+    width: 100%;
+    margin: 0;
+    border: 2px solid transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.special .password-icon {
+    padding: 10px 0 10px 0;
+}
+
+.login-select {
+    margin: 0 10px 10px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    background: transparent;
+    padding: 10px;
+    outline: #006090;
+    border-radius: 2px;
+    box-shadow: 0 0 4px 1px #5555;
+    color: #101010;
+}
+
+.forgot-password {
+    text-align: center;
+    color: #006090;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/** FULLSCREN LOADER WHILE LOGGIN IN ***/
+
+.full-screen-loader-container {
+    position: absolute;
+    padding: 20px;
+    left: 50%;
+    margin-left: -50px;
+    top: 50%;
+    margin-top: -50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 1px #5555;
+    z-index: 10;
+    display: flex;
+    flex-flow: column;
+}
+
+.full-screen-loader-container h4 {
+    margin: 0;
+}
