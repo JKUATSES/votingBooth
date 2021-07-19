@@ -1,36 +1,54 @@
-import {checkLogin} from "../helpers/CheckLogin";
-import {useDispatch} from "react-redux";
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import {IMAGE} from "../helpers/constants";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import LoginForm from "../layouts/LoginForm";
+import {isAuthenticated} from "../helpers/LoginUtilities";
 
-const LoginPage = () => {
-    const dispatch = useDispatch();
-    let loggedIn = checkLogin(dispatch);
+const LoginPage = (props) => {
+    const [authenticated, setAuthenticated] = useState(false);
+    const history = useHistory();
 
-    if (loggedIn) {
-        return <Redirect to={"/"}/>;
-    } else return (
+    useEffect(() => {
+        async function checkAuth() {
+            const isAuth = await isAuthenticated() || false;
+            setAuthenticated(isAuth);
+        }
+
+        checkAuth();
+    }, []);
+
+    console.log("found: ", authenticated)
+
+    if (authenticated) {
+        console.log("redirecting to homepage...")
+        history.push("/")
+    }
+
+    return (
         <>
-            <Helmet>
-                <meta charSet="utf-8"/>
-                <title>{"JKUAT SES Voting System | Login"}</title>
-            </Helmet>
+            {
 
-            <div className={"login-container"}>
-                <div className={"login-page"}>
-                    <div className={"password-logo-container"}>
-                        <img src={IMAGE("logo.png")} alt="JKUAT SES"/>
-                        <span className={"logo-text"}>JKUAT SES</span>
-                    </div>
+                    <>
+                        <Helmet>
+                            <meta charSet="utf-8"/>
+                            <title>{"JKUAT SES Voting System | Login"}</title>
+                        </Helmet>
 
-                    <LoginForm displayMode={'signup'} />
-                </div>
-            </div>
+                        <div className={"login-container"}>
+                            <div className={"login-page"}>
+                                <div className={"password-logo-container"}>
+                                    <img src={IMAGE("logo.png")} alt="JKUAT SES"/>
+                                    <span className={"logo-text"}>JKUAT SES</span>
+                                </div>
+
+                                <LoginForm displayMode={'login'}/>
+                            </div>
+                        </div>
+                    </>
+            }
         </>
     )
-};
+}
 
 export default LoginPage;

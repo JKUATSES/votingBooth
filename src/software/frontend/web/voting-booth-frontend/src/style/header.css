@@ -1,0 +1,46 @@
+.header_container {
+    box-shadow: 0 0 7px 2px #aaa;
+}
+
+.header {
+    padding: 8px 40px 8px 40px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-text.home {
+    color: var(--heading-color);
+}
+
+.logo_text a {
+    text-decoration: none;
+}
+
+.menu {
+    margin-left: auto;
+    color: var(--heading-color);
+}
+
+.menu .menu_item {
+    padding: 4px;
+    margin-right: 4px;
+    font-weight: 400;
+}
+
+.menu a {
+    text-decoration: none;
+}
+
+.menu .logout_button {
+    cursor: pointer;
+}
+
+.menu .logout_button{
+    margin-right: 0;
+}
+
+.menu .selected,
+.menu .menu_item:hover {
+    color: var(--selection-color);
+    text-decoration: underline;
+}

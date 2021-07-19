@@ -2,7 +2,8 @@ import RouteWrapper from "./router/RouteWrapper";
 import { ToastContainer } from "react-toastify";
 import React from "react";
 
-import './App.css';
+import './style/App.css';
+import './style/header.css';
 
 const App = () => {
   return (

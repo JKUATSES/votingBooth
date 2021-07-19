@@ -6,7 +6,7 @@ import {LoginProgressLoader} from "../components/login/LoginProgressLaoder";
 import LoginTextInput, {LoginPhoneInput} from "../components/login/LoginTextInput";
 import PasswordInput from "../components/login/PasswordInput";
 import {useDispatch} from "react-redux";
-import {signUp} from "../redux/auth/auth.reducer";
+import {login, signUp} from "../redux/auth/auth.reducer";
 import {useHistory, useLocation} from "react-router-dom";
 
 const LoginForm = ({displayMode}) => {
@@ -14,7 +14,7 @@ const LoginForm = ({displayMode}) => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     let location = useLocation();
-    let {from} = location.state || {from: {pathname: "/"}};
+    let {from} = location.state || {from: {pathname: "/dashboard/profile"}};
     const history = useHistory();
 
     const [user, setUser] = useState("");
@@ -30,8 +30,10 @@ const LoginForm = ({displayMode}) => {
     const onSubmit = async (event) => {
         event.preventDefault();
         if (mode === 'login') {
-            //login code
+            //dispatch the login event
+            dispatch(login(user, password, history, from, setLoading))
         } else {
+            //dispatch the signup event
             dispatch(signUp(regNo, email, name, mobileNo, password1, password2, history, from, setLoading))
         }
     };
@@ -73,10 +75,12 @@ const LoginForm = ({displayMode}) => {
                                     Continue &rarr;
                                 </button>
 
+                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                 <a href={"#"} className={"forgot-password"}>
                                     Forgot password?
                                 </a>
 
+                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                 <a className={"forgot-password"} onClick={e => setMode('sign-up')}>
                                     Don't have an account? Create one.
                                 </a>
