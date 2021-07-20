@@ -10,10 +10,22 @@ from django.utils.translation import ugettext_lazy as _
 from .models import User
 
 
+def is_regno_valid(regno):
+    return re.match(r"^[a-zA-Z]{3}\d{3}-\d{4}/20[1-2]\d$", regno)
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['name', 'email', 'regno', 'mobileno']
+
+    def validate_regno(self, regno):
+        regno = str(regno).strip().lower()
+        if not is_regno_valid(regno):
+            raise serializers.ValidationError(
+                _('Registration number is invalid')
+            )
+        return regno
 
 
 class UserRegisterSerializer(serializers.Serializer):
@@ -42,7 +54,7 @@ class UserRegisterSerializer(serializers.Serializer):
                 _('Registration number already exists')
             )
         regno = str(regno).strip().lower()
-        if not re.match(r"^[a-zA-Z]{3}\d{3}-\d{4}/20[1-2]\d$", regno):
+        if not is_regno_valid(regno):
             raise serializers.ValidationError(
                 _('Registration number is invalid')
             )
