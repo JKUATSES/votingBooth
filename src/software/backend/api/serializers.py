@@ -13,16 +13,10 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['name', 'email', 'regno', 'name', 'mobileno']
+        fields = ['name', 'email', 'regno', 'mobileno']
 
 
 class UserRegisterSerializer(serializers.Serializer):
-
-    def create(self, validated_data):
-        pass
-
-    def update(self, instance, validated_data):
-        pass
 
     regno = serializers.CharField(
         max_length=20,
@@ -34,6 +28,12 @@ class UserRegisterSerializer(serializers.Serializer):
     name = serializers.CharField()
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
+
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass
 
     def validate_regno(self, regno):
         regno = get_adapter().clean_regno(regno)
