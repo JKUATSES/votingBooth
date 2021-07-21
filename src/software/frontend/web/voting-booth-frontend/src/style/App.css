@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+:root {
+    --main-color: #17353F;
+    --background-color: white;
+    --subtle-white-text: #fafafa;
+    --subtle-background-color: #edf2f8;
+    --heading-color: #006090;
+    --selection-color: orangered;
+}
+
 /* Works on Firefox */
 * {
     scrollbar-width: thin;
@@ -29,7 +38,7 @@
 }
 
 body {
-    background-color: #edf2f8;
+    background-color: var(--subtle-background-color);
     margin: 0;
     padding: 0;
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -56,14 +65,18 @@ h1 {
     padding: 10px 10px 10px 30px;
     font-size: 1.5em;
     font-weight: bold;
-    color: #006090;
+    color: var(--heading-color);
     text-align: left;
     background: white;
 }
 
+.loader_global {
+
+}
+
 .Dashboard {
     width: 95%;
-    background-color: white;
+    background-color: var(--background-color);
     min-height: 65vh;
     height: 85vh;
     border-radius: 10px;
@@ -71,7 +84,7 @@ h1 {
     margin: 15px auto;
     display: flex;
     flex-direction: row;
-    color: white;
+    color: var(--background-color);
 }
 
 
@@ -82,12 +95,11 @@ h1 {
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: #ffffff;
+    background-color: var(--background-color);
 }
 
 .login-page {
     padding: 6px;
-    /*max-height: 50%;*/
     width: -moz-fit-content;
     width: 700px;
     min-height: 400px;
@@ -101,7 +113,7 @@ h1 {
     flex-flow: column;
     align-items: center;
     width: 50%;
-    background-color: #17353F;
+    background-color: var(--main-color);
     -webkit-box-align: center;
     -moz-box-align: center;
     -webkit-box-pack: center;
@@ -117,11 +129,11 @@ h1 {
     height: 150px;
 }
 
-.password-logo-container span {
+.logo-text {
     margin: 5px;
     font-size: 32px;
     font-weight: bold;
-    color: #fafafa;
+    color: var(--subtle-white-text);
 }
 
 .login-form {
@@ -138,7 +150,7 @@ h1 {
     font-weight: 600;
     margin: 10px 0 16px 0;
     text-align: center;
-    color: #006090;
+    color: var(--heading-color);
 }
 
 .login-form .input-row {
@@ -156,7 +168,7 @@ h1 {
     border: 2px solid transparent;
     background: transparent;
     padding: 10px;
-    outline: #006090;
+    outline: var(--heading-color);
     border-radius: 2px;
     margin: 0 10px 10px;
     box-shadow: 0 0 4px 1px #5555;
@@ -165,7 +177,7 @@ h1 {
 
 .login-form input:focus,
 .password-field:focus {
-    border: 2px solid #006090;
+    border: 2px solid var(--heading-color);
     transition: all 0.15s;
 }
 
@@ -190,30 +202,31 @@ h1 {
     color: #101010;
 }
 
-.phone-input.password-field{
+.phone-input.password-field {
     flex-flow: row-reverse;
     margin: 0 10px 10px;
 }
 
-.phone-input.password-field .login-input{
+.phone-input.password-field .login-input {
     margin: 0;
     box-shadow: none;
     flex-grow: 1;
 }
 
-.phone-input.password-field span{
+.phone-input.password-field span {
     padding: 10px;
     font-size: 14px;
 }
-.phone-input.password-field .login-input:focus{
-    border: 2px solid #006090;
+
+.phone-input.password-field .login-input:focus {
+    border: 2px solid var(--heading-color);
     border-left-width: 0;
 }
 
 .phone-input.password-field .login-input:focus + span {
-    border: 2px solid #006090;
+    border: 2px solid var(--heading-color);
     border-right-width: 0;
-        font-size: 12.5px;
+    font-size: 12.5px;
 }
 
 .password-field svg {
@@ -239,7 +252,7 @@ h1 {
     border: 2px solid transparent;
     background: transparent;
     padding: 10px;
-    outline: #006090;
+    outline: var(--heading-color);
     border-radius: 2px;
     box-shadow: 0 0 4px 1px #5555;
     color: #101010;
@@ -247,7 +260,7 @@ h1 {
 
 .forgot-password {
     text-align: center;
-    color: #006090;
+    color: var(--heading-color);
     text-decoration: none;
     font-size: 14px;
     margin-top: 10px;
@@ -263,14 +276,49 @@ h1 {
     margin-left: -50px;
     top: 50%;
     margin-top: -50px;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     border-radius: 10px;
     box-shadow: 0 0 4px 1px #5555;
     z-index: 10;
     display: flex;
     flex-flow: column;
+    align-items: center;
 }
 
 .full-screen-loader-container h4 {
     margin: 0;
+}
+
+
+/********* DASHBOARD PAGE ********/
+
+.dashboard {
+    padding: 10px 40px;
+}
+
+.profile_page {
+    display: flex;
+    flex-flow: column;
+}
+
+.profile_page .profile_img {
+    width: fit-content;
+    align-self: center;
+    margin: 0 32px;
+}
+
+.profile_img img {
+    width: 120px;
+    height: 120px;
+    padding: 4px;
+}
+
+.profile_page .profile_details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_page .profile_details .other_details {
+   margin: 0 32px;
 }

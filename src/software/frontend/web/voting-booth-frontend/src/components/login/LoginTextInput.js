@@ -10,7 +10,7 @@ const LoginTextInput = (props) => {
             placeholder={label}
             onChange={onChange}
             required={true}
-            autoComplete={true}
+            autoComplete={"true"}
             autoFocus={focus}
         />
     );
@@ -28,7 +28,7 @@ export const LoginPhoneInput = (props) => {
                 placeholder={label}
                 onChange={onChange}
                 required={true}
-                autoComplete={true}
+                autoComplete={"true"}
                 autoFocus={focus}
             />
             <span>254</span>

@@ -1,6 +1,6 @@
 import authTypes from "../auth/auth.types";
-import axios from "axios"
-import {errorToaster} from "../../helpers/Toaster";
+import {errorToaster, successToaster} from "../../helpers/Toaster";
+import {axiosInstance} from "../../api/api";
 
 const initialState = {
     loggedIn: false,
@@ -13,35 +13,22 @@ const initialState = {
     refresh_token: "",
 };
 
-export function storeUser(name, email, regno, mobileno, access_token, refresh_token) {
-    return async function setUser(dispatch, getState) {
-        dispatch({
-            type: authTypes.AUTH_SUCCESS,
-            name: name,
-            email: email,
-            regno: regno,
-            mobileno: mobileno,
-            access_token: access_token,
-            refresh_token: refresh_token,
-        });
-    };
-}
-
 function checkErrors(response) {
-    console.log("response", response)
-    if (response.regno !== undefined) {
+    if (response?.detail !== undefined) {
+        return "Error: " + response.detail
+    } else if (response?.regno !== undefined) {
         return "Reg number: " + response.regno[0]
-    } else if (response.email !== undefined) {
+    } else if (response?.email !== undefined) {
         return "Email: " + response.email[0]
-    } else if (response.mobileno !== undefined) {
+    } else if (response?.mobileno !== undefined) {
         return "Mobile number: " + response.mobileno[0]
-    } else if (response.name !== undefined) {
+    } else if (response?.name !== undefined) {
         return "Name: " + response.name[0]
-    } else if (response.password1 !== undefined) {
+    } else if (response?.password1 !== undefined) {
         return "Password: " + response.password1[0]
-    } else if (response.password2 !== undefined) {
+    } else if (response?.password2 !== undefined) {
         return "Password: " + response.password2[0]
-    } else if (response.non_field_errors !== undefined) {
+    } else if (response?.non_field_errors !== undefined) {
         return "Password: " + response.non_field_errors[0]
     } else {
         return null
@@ -53,9 +40,9 @@ export function signUp(regNo, email, name, mobileNo, password1, password2, histo
         let error = null;
         try {
             setLoading(true);
-            await axios.post(
+            await axiosInstance.post(
                 // Change link to reflect the Django signup endpoint
-                "http://localhost:8000/api/v1/auth/signup/",
+                "auth/signup/",
                 {
                     regno: regNo,
                     email: email,
@@ -66,6 +53,7 @@ export function signUp(regNo, email, name, mobileNo, password1, password2, histo
                 }
             ).then((response) => {
                 if (error === null) {
+                    localStorage.setItem("startTime", Date.now().toString());
                     localStorage.setItem("name", response.data.user.name);
                     localStorage.setItem("email", response.data.user.email);
                     localStorage.setItem("regno", response.data.user.regno);
@@ -73,6 +61,7 @@ export function signUp(regNo, email, name, mobileNo, password1, password2, histo
                     localStorage.setItem("access_token", response.data.access_token);
                     localStorage.setItem("refresh_token", response.data.refresh_token);
 
+                    successToaster("Signed up successfully")
                     history.replace(from);
                 }
                 setLoading(false)
@@ -83,6 +72,77 @@ export function signUp(regNo, email, name, mobileNo, password1, password2, histo
             });
         } catch (err) {
             setLoading(false);
+        }
+
+        setLoading(false);
+    };
+}
+
+async function getProfile(access) {
+    let profile = {};
+
+    await axiosInstance.get(
+        "/users/profile/",
+        {
+            headers: {
+                'Authorization': `Bearer ${access}`
+            }
+        }
+    ).then((response => {
+        let data = response.data;
+        if (data !== null) {
+            profile["name"] = data.name;
+            profile["email"] = data.email;
+            profile["regno"] = data.regno;
+            profile["mobileno"] = data.mobileno;
+        }
+    })).catch((error => {
+        console.log("Couldn't fetch profile: ", error.data)
+    }));
+
+    return profile;
+}
+
+export function login(regNo, password, history, from, setLoading) {
+    return async function loginUser(dispatch, getState) {
+        let error = null;
+        try {
+            setLoading(true);
+            await axiosInstance.post(
+                // Change link to reflect the Django signup endpoint
+                "/auth/login/",
+                {
+                    regno: regNo,
+                    password: password
+                }
+            ).then(async (response) => {
+                const data = response?.data;
+                if (error === null) {
+                    localStorage.setItem("startTime", Date.now().toString());
+                    localStorage.setItem("access_token", response.data.access);
+                    localStorage.setItem("refresh_token", response.data.refresh);
+
+                    const profile = await getProfile(data.access);
+                    localStorage.setItem("name", profile['name']);
+                    localStorage.setItem("email", profile['email']);
+                    localStorage.setItem("regno", regNo);
+                    localStorage.setItem("mobileno", profile['mobileno']);
+
+                    successToaster("Logged in successfully")
+                    history.replace(from);
+                }
+                setLoading(false)
+            }).catch((err) => {
+                setLoading(false);
+                error = checkErrors(err.response?.data)
+                console.log(err)
+                console.log(`${error}`);
+                errorToaster(`${error}`);
+            });
+        } catch (err) {
+            setLoading(false);
+            console.log(`${err}`);
+            // errorToaster(`Could not communicate with server. Please check your internet connection.`);
         }
 
         setLoading(false);
