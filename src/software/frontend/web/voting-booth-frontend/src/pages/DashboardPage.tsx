@@ -33,7 +33,7 @@ const DashboardPage = (props) => {
             history.replace({from: {pathname: "/login"}});
         }
         setUser(loggedUser);
-    }, [history])
+    }, [history]);
 
 
     return (

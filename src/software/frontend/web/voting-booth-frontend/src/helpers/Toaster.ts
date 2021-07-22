@@ -20,13 +20,13 @@ export const errorToaster = (
 
 export const successToaster = (
   message = "Message",
-  position = "top-center",
-  autoClose = 5000,
+  position = 'top-right',
+  autoClose = 2000,
   transition = Slide
 ) => {
   return toast.success(message ?? "Message", {
     transition: transition,
-    position: "top-center",
+    position: 'top-right',
     autoClose: autoClose,
     hideProgressBar: false,
     closeOnClick: true,
