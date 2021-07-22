@@ -8,6 +8,12 @@ import PasswordInput from "../components/login/PasswordInput";
 import {useDispatch} from "react-redux";
 import {login, signUp} from "../redux/auth/auth.reducer";
 import {useHistory, useLocation} from "react-router-dom";
+import {errorToaster} from "../helpers/Toaster";
+
+export function validateEmail(email) {
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+
+}
 
 const LoginForm = ({displayMode}) => {
     const [mode, setMode] = useState(displayMode);
@@ -34,7 +40,9 @@ const LoginForm = ({displayMode}) => {
             dispatch(login(user, password, history, from, setLoading))
         } else {
             //dispatch the signup event
-            dispatch(signUp(regNo, email, name, mobileNo, password1, password2, history, from, setLoading))
+            if (validateEmail(email))
+                dispatch(signUp(regNo, email, name, mobileNo, password1, password2, history, from, setLoading))
+            else errorToaster("You have entered an invalid email address!")
         }
     };
 
@@ -114,7 +122,10 @@ const LoginForm = ({displayMode}) => {
                                 <LoginPhoneInput
                                     label={"Phone number e.g +2547...."}
                                     initialValue={""}
-                                    onChange={(e) => setMobileNo("+254" + e.target.value)}
+                                    onChange={(e) => {
+                                        setMobileNo("+254" + e.target.value);
+                                        console.log("detected change")
+                                    }}
                                 />
 
                                 <PasswordInput

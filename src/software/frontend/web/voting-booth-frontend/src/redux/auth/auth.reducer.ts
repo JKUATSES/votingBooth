@@ -78,7 +78,7 @@ export function signUp(regNo, email, name, mobileNo, password1, password2, histo
     };
 }
 
-async function getProfile(access) {
+export async function getProfile(access) {
     let profile = {};
 
     await axiosInstance.get(
@@ -137,7 +137,7 @@ export function login(regNo, password, history, from, setLoading) {
                 error = checkErrors(err.response?.data)
                 console.log(err)
                 console.log(`${error}`);
-                errorToaster(`${error}`);
+                errorToaster(`${error}`, 'top-right', 2000);
             });
         } catch (err) {
             setLoading(false);
