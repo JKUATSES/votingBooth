@@ -18,5 +18,4 @@ class Profile(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
-        print(self.request.user)
         return self.request.user
