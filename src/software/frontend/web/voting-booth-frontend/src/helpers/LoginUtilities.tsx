@@ -24,7 +24,7 @@ export async function isAuthenticated() {
     } else if (Date.now() >= (startTime + (23 * 60 * 60 * 1000))) { //23 hours - refresh_token has expired. user has to log in again
         localStorage.clear();
         return false;
-    } else if (Date.now() >= (startTime + (0.5 * 60 * 1000))) { // the token has expired - 4.5 minutes
+    } else if (Date.now() >= (startTime + (4.5 * 60 * 1000))) { // the token has expired - 4.5 minutes
         const token = await refreshToken(refresh_token)
         localStorage.setItem("access_token", token);
     }
