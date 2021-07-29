@@ -18,10 +18,7 @@ const LoginPage = (props) => {
         checkAuth();
     }, []);
 
-    console.log("found: ", authenticated)
-
     if (authenticated) {
-        console.log("redirecting to homepage...")
         history.push("/")
     }
 

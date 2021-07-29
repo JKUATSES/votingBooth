@@ -86,7 +86,7 @@ export function getLoggedUser() {
         name: localStorage.getItem("name"),
         email: localStorage.getItem("email"),
         regno: localStorage.getItem("regno"),
-        mobileno: localStorage.getItem("mobileno"),
+        mobileno: "+254".concat(localStorage.getItem("mobileno")?.substr(localStorage.getItem("mobileno")?.length - 9)) ?? "",
         access_token: localStorage.getItem("access_token"),
         refresh_token: localStorage.getItem("refresh_token"),
     };
@@ -104,3 +104,7 @@ export function getLoggedField(field) {
 
     return user[field];
 }
+
+export const refreshPage = ()=>{
+     window.location.reload();
+  }
